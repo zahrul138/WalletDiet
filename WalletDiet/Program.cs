@@ -15,6 +15,8 @@ namespace WalletDiet
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
@@ -37,52 +39,52 @@ namespace WalletDiet
 
 
             /* Seeding Account */
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<AppDbContext>();
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    var services = scope.ServiceProvider;
+            //    var context = services.GetRequiredService<AppDbContext>();
 
-                await context.Database.MigrateAsync();
+            //    await context.Database.MigrateAsync();
 
-                var existingUser = await context.Users
-                    .Select(u => u.Username)
-                    .ToListAsync();
+            //    var existingUser = await context.Users
+            //        .Select(u => u.Username)
+            //        .ToListAsync();
 
-                var hasher = new PasswordHasher<User>();
+            //    var hasher = new PasswordHasher<User>();
 
-                var user = new User
-                {
-                    Username = "",
-                    Role = "",
-                    Email = ""
-                };
+            //    var user = new User
+            //    {
+            //        Username = "",
+            //        Role = "",
+            //        Email = ""
+            //    };
 
-                var admin = new User
-                {
-                    Username = "",
-                    Role = "",
-                    Email = ""
-                };
+            //    var admin = new User
+            //    {
+            //        Username = "",
+            //        Role = "",
+            //        Email = ""
+            //    };
 
-                user.PasswordHash = hasher.HashPassword(user, "");
-                admin.PasswordHash = hasher.HashPassword(admin, "");
+            //    user.PasswordHash = hasher.HashPassword(user, "");
+            //    admin.PasswordHash = hasher.HashPassword(admin, "");
 
-                var users = new List<User>
-                {
-                    user,
-                    admin
-                };
+            //    var users = new List<User>
+            //    {
+            //        user,
+            //        admin
+            //    };
 
-                var newUsers = users
-                    .Where(r => !existingUser.Contains(r.Username))
-                    .ToList();
+            //    var newUsers = users
+            //        .Where(r => !existingUser.Contains(r.Username))
+            //        .ToList();
 
-                if (newUsers.Count > 0)
-                {
-                    await context.Users.AddRangeAsync(newUsers);
-                    await context.SaveChangesAsync();
-                }
-            }
+            //    if (newUsers.Count > 0)
+            //    {
+            //        await context.Users.AddRangeAsync(newUsers);
+            //        await context.SaveChangesAsync();
+            //    }
+            //}
 
             if (!app.Environment.IsDevelopment())
             {
