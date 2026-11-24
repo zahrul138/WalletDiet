@@ -1,0 +1,683 @@
+﻿/* CSS Login, Register, And Forgot Password Templete */
+
+/* Bootstrap .card made translucent through --bs-card-* variables, dark .form-control fields and a gradient .btn. */
+.gl {
+    --gl-muted: #aab0c4;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 24px;
+    background: #0b0f1e;
+    color: #eef0f6;
+    font-family: var(--bs-body-font-family);
+    line-height: normal;
+}
+
+.gl-blob {
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .55;
+    pointer-events: none
+}
+
+.gl-b1 {
+    width: 420px;
+    height: 420px;
+    background: #6d28d9;
+    top: -120px;
+    left: -80px;
+    animation: gl-drift 14s ease-in-out infinite alternate
+}
+
+.gl-b2 {
+    width: 380px;
+    height: 380px;
+    background: #0ea5e9;
+    bottom: -100px;
+    right: -60px;
+    animation: gl-drift 17s ease-in-out infinite alternate-reverse
+}
+
+.gl-b3 {
+    width: 260px;
+    height: 260px;
+    background: #db2777;
+    bottom: 20%;
+    left: 12%;
+    animation: gl-drift 21s ease-in-out infinite alternate
+}
+
+@keyframes gl-drift {
+    to {
+        transform: translate(60px,40px) scale(1.15)
+    }
+}
+
+.gl .card {
+    --bs-card-bg: rgba(255,255,255,.07);
+    --bs-card-border-color: rgba(255,255,255,.16);
+    --bs-card-border-radius: 22px;
+    --bs-card-spacer-y: 44px;
+    --bs-card-spacer-x: 38px;
+    --bs-card-color: #eef0f6;
+    z-index: 1;
+    max-width: 380px;
+    -webkit-backdrop-filter: blur(22px);
+    backdrop-filter: blur(22px);
+    box-shadow: 0 24px 60px rgba(0,0,0,.45)
+}
+
+.gl h1 {
+    font-size: 1.55rem;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    margin-bottom: 6px
+}
+
+.gl-field {
+    margin-bottom: 18px
+}
+
+.gl-sub {
+    color: var(--gl-muted);
+    font-size: .9rem;
+    margin-bottom: 30px
+}
+
+.gl .form-label {
+    font-size: .8rem;
+    font-weight: 600;
+    color: #c8cddd;
+    margin-bottom: 7px
+}
+
+.gl .form-control {
+    padding: 12px 14px;
+    border-radius: 11px;
+    border-color: rgba(255,255,255,.42);
+    background-color: rgba(255,255,255,.06);
+    color: #fff;
+    font-size: .95rem;
+    line-height: 1.2
+}
+
+.gl .form-control::placeholder {
+    color: #9ba1b5
+}
+
+.gl .form-control:focus {
+    border-color: rgba(255,255,255,.85);
+    background-color: rgba(255,255,255,.1);
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba(255,255,255,.18)
+}
+
+.gl .btn-gl {
+    --bs-btn-color: #0b0f1e;
+    --bs-btn-hover-color: #0b0f1e;
+    --bs-btn-active-color: #0b0f1e;
+    --bs-btn-border-width: 0;
+    --bs-btn-padding-y: 13px;
+    --bs-btn-font-size: .95rem;
+    --bs-btn-font-weight: 700;
+    --bs-btn-border-radius: 11px;
+    --bs-btn-line-height: 1.2;
+    --bs-btn-focus-box-shadow: none;
+    margin-top: 6px;
+    background: linear-gradient(90deg,#e0e7ff,#fff);
+    transition: transform .12s,box-shadow .15s
+}
+
+.gl .btn-gl:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(255,255,255,.18)
+}
+
+.gl-alt {
+    color: var(--gl-muted);
+    font-size: .85rem;
+    margin-top: 22px
+}
+
+.gl-alt a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,.5)
+}
+
+.gl-alt a:hover {
+    border-bottom-color: #fff
+}
+
+.gl a:focus-visible, .gl .btn-gl:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+    border-radius: 3px
+}
+
+.gl .btn-gl:focus-visible {
+    border-radius: 11px
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .gl-blob {
+        animation: none
+    }
+
+    .gl .form-control, .gl .btn-gl {
+        transition: none
+    }
+
+        .gl .btn-gl:hover {
+            transform: none
+        }
+}
+
+/* Narrow-screen and control accessibility refinement. */
+.gl {
+    --gl-muted: #e2e5ef
+}
+
+.gl-card {
+    background: rgba(7,13,30,.72)
+}
+
+.gl-input::placeholder {
+    color: #c8cddd
+}
+
+/* Prevent unwanted scrolling */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+/* Responsive Login Page */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .gl {
+        padding: 20px;
+    }
+
+    .gl .card {
+        max-width: 420px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .gl {
+        padding: 16px;
+    }
+
+    .gl .card {
+        max-width: 100%;
+        --bs-card-spacer-y: 30px;
+        --bs-card-spacer-x: 24px;
+    }
+
+    .gl h1 {
+        font-size: 1.4rem;
+    }
+}
+
+/* Short screens */
+@media (max-height: 550px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .gl {
+        min-height: 100dvh;
+        height: auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+        .gl .card {
+            --bs-card-spacer-y: 24px;
+        }
+
+    .gl-sub {
+        margin-bottom: 18px;
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/* =====================================================
+   CSS FOR PROFILE PAGE
+===================================================== */
+
+
+/* =========================
+   1. DARK THEME
+========================= */
+
+:where([data-scene="dark"]) {
+    color-scheme: dark;
+    --scene-base: linear-gradient(155deg, #0a0c22 0%, #170c2c 52%, #06171f 100%);
+    --scene-1: linear-gradient(140deg, #6d28d9, #a21caf);
+    --scene-2: linear-gradient(140deg, #e11d48, #ea580c);
+    --scene-3: linear-gradient(140deg, #0891b2, #2563eb);
+    --scene-4: linear-gradient(140deg, #ca8a04, #c2410c);
+    --glass-tint: 16 18 44;
+    --glass-border: rgb(255 255 255 / .2);
+    --glass-highlight: inset 0 1px 0 rgb(255 255 255 / .16);
+    --glass-shadow: 0 18px 40px -18px rgb(0 0 0 / .75);
+    --glass-ink: #f5f6ff;
+    --glass-ink-soft: #d0d3ee;
+    --glass-alpha: .6;
+    --glass-blur: 18px;
+    --glass-saturate: 150%;
+    --glass-radius: 20px;
+    /* Form colors */
+    --glass-bg-control: rgb(255 255 255 / .035);
+    --glass-bg-strong: rgb(255 255 255 / .08);
+    --glass-edge: rgb(255 255 255 / .16);
+    --glass-focus: rgb(147 197 253 / .65);
+}
+
+
+/* =========================
+   2. GLASS VARIABLES
+========================= */
+
+:where([data-scene]) {
+    color: var(--glass-ink);
+    --glass-bg: rgb(var(--glass-tint) / var(--glass-alpha));
+    --bs-body-color: var(--glass-ink);
+    --bs-secondary-color: var(--glass-ink-soft);
+    --bs-border-color: var(--glass-border);
+    --bs-emphasis-color: var(--glass-ink);
+}
+
+
+/* =========================
+   3. BACKGROUND SCENE
+========================= */
+
+.g-scene {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--scene-base);
+}
+
+.g-scene i {
+    position: absolute;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: g-drift 32s ease-in-out infinite alternate;
+}
+
+.g-scene i:nth-child(1) {
+    width: clamp(240px, 40vw, 520px);
+    left: -7%;
+    top: -9%;
+    background: var(--scene-1);
+}
+
+.g-scene i:nth-child(2) {
+    width: clamp(170px, 26vw, 360px);
+    right: -5%;
+    top: 18%;
+    background: var(--scene-2);
+    animation-delay: -9s;
+}
+
+.g-scene i:nth-child(3) {
+    width: clamp(220px, 34vw, 460px);
+    left: 28%;
+    bottom: -16%;
+    background: var(--scene-3);
+    animation-delay: -17s;
+}
+
+.g-scene i:nth-child(4) {
+    width: clamp(90px, 13vw, 180px);
+    left: 54%;
+    top: 7%;
+    background: var(--scene-4);
+    animation-delay: -4s;
+}
+
+@keyframes g-drift {
+    to {
+        transform: translate3d(3vw, 4vh, 0) scale(1.06);
+    }
+}
+
+
+/* =========================
+   4. GLASS CARD
+========================= */
+
+.g-glass {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--glass-highlight), var(--glass-shadow);
+    color: var(--glass-ink);
+}
+
+.card.g-glass {
+    width: 50%;
+    --bs-card-bg: var(--glass-bg);
+    --bs-card-border-color: var(--glass-border);
+    --bs-card-border-radius: var(--glass-radius);
+    --bs-card-color: var(--glass-ink);
+    --bs-card-spacer-x: 24px;
+    --bs-card-spacer-y: 24px;
+}
+
+@media (max-width: 991.98px) {
+    .card.g-glass {
+        width: 100%;
+    }
+}
+
+
+/* =========================
+   5. PROFILE PICTURE
+========================= */
+
+.profile-picture {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: visible;
+    margin: 0 auto;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/* =========================
+   6. EDIT BUTTONS
+========================= */
+
+.profile-edit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--glass-ink-soft);
+    cursor: pointer;
+    transition: color .2s;
+    transform: translateY(-3px);
+}
+
+.profile-edit-btn:hover {
+    color: var(--glass-ink);
+}
+
+.profile-edit-btn svg {
+    width: 17px;
+    height: 17px;
+}
+
+
+/* Picture Edit */
+
+.picture-edit {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--scene-2);
+    color: white;
+    border: 2px solid var(--glass-border);
+}
+
+.picture-edit:hover {
+    color: white;
+    filter: brightness(1.15);
+}
+
+
+/* =========================
+   7. USERNAME
+========================= */
+
+.profile-name-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.profile-name {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--glass-ink);
+}
+
+#username-input {
+    width: 100%;
+    max-width: 250px;
+}
+
+
+/* =========================
+   8. FORM
+========================= */
+
+.g-form {
+    --bs-body-bg: var(--glass-bg-control);
+    --bs-body-color: var(--glass-ink);
+    --bs-border-color: var(--glass-edge);
+    --bs-border-radius: 12px;
+    --bs-secondary-color: var(--glass-ink-soft);
+    --bs-secondary-bg: var(--glass-bg-control);
+    --bs-tertiary-bg: var(--glass-bg-control);
+}
+
+.g-form .form-label {
+    margin-bottom: 6px;
+    font-size: .88rem;
+    font-weight: 600;
+    color: var(--glass-ink);
+}
+
+.g-form .form-control {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 14px;
+    font-size: .95rem;
+    color: var(--glass-ink);
+    background-color: var(--glass-bg-control);
+    border-color: var(--glass-edge);
+    box-shadow: var(--glass-highlight);
+    transition: background-color .2s, border-color .2s;
+}
+
+.g-form .form-control::placeholder {
+    color: var(--glass-ink-soft);
+    opacity: 1;
+}
+
+.g-form .form-control:hover,
+.g-form .form-control:focus {
+    color: var(--glass-ink);
+    background-color: var(--glass-bg-strong);
+    border-color: var(--glass-edge);
+}
+
+.g-form .form-control:focus {
+    box-shadow: var(--glass-highlight);
+}
+
+.g-form .form-control:focus-visible {
+    outline: 3px solid var(--glass-focus);
+    outline-offset: 2px;
+}
+
+
+/* =========================
+   9. FORM LABEL & EDIT ICON
+========================= */
+
+.profile-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.profile-label .form-label {
+    margin-bottom: 6px;
+}
+
+
+/* =========================
+   10. PASSWORD INPUT & EYE
+========================= */
+
+.profile-password-group {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(46px, auto);
+    align-items: center;
+    width: 100%;
+}
+
+.profile-password-group > .form-control,
+.profile-password-group > .profile-eye-btn {
+    grid-area: 1 / 1;
+}
+
+.profile-password-group > .form-control {
+    width: 100%;
+    padding-right: 45px;
+}
+
+.profile-password-group > .profile-eye-btn {
+    justify-self: end;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--glass-ink-soft);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.profile-password-group > .profile-eye-btn:hover {
+    color: var(--glass-ink);
+}
+
+.profile-password-group > .profile-eye-btn svg {
+    width: 19px;
+    height: 19px;
+}
+
+
+/* =========================
+   11. ACCESSIBILITY
+========================= */
+
+.profile-eye-btn:focus-visible,
+.profile-edit-btn:focus-visible {
+    outline: 2px solid var(--glass-focus);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .g-scene i {
+        animation: none;
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    :where(:root) {
+        --glass-alpha: .93;
+        --glass-blur: 8px;
+    }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    :where(:root) {
+        --glass-alpha: .94;
+    }
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.password-input-wrapper .form-control {
+    padding-right: 45px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.toggle-password svg {
+    width: 20px;
+    height: 20px;
+}
+
+.toggle-password:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.picture-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.profile-picture img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}

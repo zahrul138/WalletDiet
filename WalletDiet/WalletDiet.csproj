@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>9e378008-4a5f-463f-85d5-b624a46b4334</UserSecretsId>
+    <AssemblyName>WalletDiet</AssemblyName>
+    <RootNamespace>WalletDiet</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="App_Data\Avatars\19babb5f-69db-4b67-bb8c-23183a95484f.jpg" />
+    <Content Include="App_Data\Avatars\35b2274c-65d4-4e30-88b7-79431de23ee7.jpg" />
+    <Content Include="App_Data\Avatars\49e34e2e-804e-4ac2-970f-f29bc683b345.jpg" />
+    <Content Include="App_Data\Avatars\52e37098-0035-4b9f-af0f-7d84720f6659.png" />
+    <Content Include="App_Data\Avatars\6c3192cc-ec27-459e-a24b-ab335b5295e6.jpg" />
+    <Content Include="App_Data\Avatars\8039181e-ead3-46f4-85fa-ce860eec01a3.jpg" />
+    <Content Include="App_Data\Avatars\882640e1-b970-4430-8fbb-526a42c602cb.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.22">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\App_Data\Avatars\" />
+    <Folder Include="wwwroot\images\avatars\uploads\" />
+  </ItemGroup>
+
+</Project>

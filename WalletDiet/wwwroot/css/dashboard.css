@@ -1,0 +1,1045 @@
+﻿
+/* =========================================
+   GLOBAL & PAGE SCROLLING
+========================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    min-height: 100vh;
+}
+
+[data-scene="dark"] {
+    position: relative;
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+}
+
+.g-scene {
+    pointer-events: none;
+}
+
+.dashboard-wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+/* =========================================
+   OUTER GLASS
+========================================= */
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 1000px;
+    min-width: 0;
+    padding: 35px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    box-shadow: var(--glass-highlight), var(--glass-shadow);
+}
+
+
+/* =========================================
+   SHARED INNER GLASS
+========================================= */
+
+.countdown-card,
+.daily-card,
+.expense-card {
+    width: 100% !important;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    --bs-card-bg: rgb(15 18 43 / 48%);
+    --bs-card-border-color: var(--glass-border);
+    --bs-card-border-radius: 22px;
+    --bs-card-color: var(--glass-ink);
+    background: linear-gradient( 145deg, rgb(255 255 255 / 7%), rgb(255 255 255 / 1.5%) ), rgb(15 18 43 / 48%);
+}
+
+
+    /* =========================================
+   COUNTDOWN CARD
+========================================= */
+
+    .countdown-card .card-body {
+        padding: 26px 30px;
+    }
+
+
+/* =========================================
+   BALANCE HEADER
+========================================= */
+
+.balance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.balance-label {
+    color: var(--glass-ink-soft);
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.balance-amount {
+    color: var(--glass-ink);
+    font-size: clamp(30px, 5vw, 48px);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.balance-amount-wrapper {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 0;
+}
+
+.initial-balance {
+    color: var(--glass-ink-soft);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.balance-icon {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(255 255 255 / 8%);
+    border: 1px solid rgb(255 255 255 / 15%);
+    border-radius: 14px;
+    color: #ffb443;
+}
+
+    .balance-icon svg {
+        width: 23px;
+        height: 23px;
+    }
+
+
+/* =========================================
+   BALANCE PERIOD
+========================================= */
+
+.balance-period {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 17px;
+    margin-bottom: 17px;
+    border-bottom: 1px solid rgb(255 255 255 / 12%);
+    color: var(--glass-ink-soft);
+    font-size: 13px;
+}
+
+.remaining-days {
+    color: #ffb443;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   BUDGET USAGE
+========================================= */
+
+.usage-section {
+    margin: 0;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    color: var(--glass-ink);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.usage-percentage {
+    color: #ffb443;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   BUDGET PROGRESS BAR
+========================================= */
+
+.usage-progress {
+    width: 100%;
+    height: 10px;
+    overflow: hidden;
+    background: rgb(255 255 255 / 12%);
+    border: 1px solid rgb(255 255 255 / 6%);
+    border-radius: 30px;
+}
+
+.usage-progress-bar {
+    width: 23.3%;
+    height: 100%;
+    background: linear-gradient(90deg, #f59e0b, #ffb443);
+    border-radius: 30px;
+    box-shadow: 0 0 12px rgb(255 180 67 / 35%);
+    transition: width 0.3s ease;
+}
+
+
+/* =========================================
+   USAGE INFORMATION
+========================================= */
+
+.usage-information {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 9px;
+    color: var(--glass-ink-soft);
+    font-size: 12px;
+}
+
+
+/* =========================================
+   DAILY ALLOWANCE CARD
+========================================= */
+
+.daily-card .card-body {
+    padding: 18px 30px;
+}
+
+.daily-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.daily-title {
+    color: var(--glass-ink);
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.daily-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(255 255 255 / 8%);
+    border: 1px solid rgb(255 255 255 / 15%);
+    border-radius: 11px;
+    color: #ffb443;
+}
+
+    .daily-icon svg {
+        width: 19px;
+        height: 19px;
+    }
+
+.daily-amount {
+    color: var(--glass-ink);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 13px;
+    overflow-wrap: anywhere;
+}
+
+.daily-information {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: var(--glass-ink-soft);
+    font-size: 12px;
+}
+
+
+/* =========================================
+   DAILY PROGRESS BAR
+========================================= */
+
+.daily-progress {
+    width: 100%;
+    height: 8px;
+    overflow: hidden;
+    background: rgb(255 255 255 / 12%);
+    border: 1px solid rgb(255 255 255 / 6%);
+    border-radius: 30px;
+}
+
+.daily-progress-bar {
+    width: 35%;
+    height: 100%;
+    background: linear-gradient(90deg, #f59e0b, #ffb443);
+    border-radius: 30px;
+    box-shadow: 0 0 12px rgb(255 180 67 / 35%);
+    transition: width 0.3s ease;
+}
+
+
+/* =========================================
+   DASHBOARD TOPBAR
+========================================= */
+
+.dashboard-topbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   WALLETDIET BRAND
+========================================= */
+
+.dashboard-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+}
+
+    .dashboard-brand h2 {
+        color: var(--glass-ink);
+        font-size: 25px;
+        font-weight: 750;
+        letter-spacing: -0.7px;
+        margin: 0;
+    }
+
+        .dashboard-brand h2 span {
+            color: #ffb443;
+        }
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffb443;
+    background: rgb(255 180 67 / 8%);
+    border: 1px solid rgb(255 180 67 / 20%);
+    border-radius: 12px;
+}
+
+    .brand-icon svg {
+        width: 23px;
+        height: 23px;
+    }
+
+
+/* =========================================
+   PROFILE BUTTON
+========================================= */
+
+.profile-button {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffb443;
+    background: rgb(255 255 255 / 7%);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+    .profile-button svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .profile-button:hover {
+        background: rgb(255 255 255 / 13%);
+        border-color: #ffb443;
+        color: #ffb443;
+    }
+
+
+/* =========================================
+   EXPENSE CARD
+========================================= */
+
+.expense-card .card-body {
+    padding: 25px 30px;
+}
+
+.expense-title {
+    color: var(--glass-ink);
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+
+/* =========================================
+   EXPENSE FORM
+========================================= */
+
+.expense-form-group {
+    margin-bottom: 18px;
+}
+
+.expense-label {
+    display: block;
+    color: var(--glass-ink-soft);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 9px;
+}
+
+.expense-input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 45px;
+    padding: 0 14px;
+    color: var(--glass-ink);
+    background: rgb(255 255 255 / 5%);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+    .expense-input::placeholder {
+        color: rgb(255 255 255 / 40%);
+    }
+
+    .expense-input:focus {
+        border-color: #ffb443;
+    }
+
+
+/* =========================================
+   CATEGORY CHIPS
+========================================= */
+
+.expense-category-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+    .expense-category-options input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+.category-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 19px;
+    color: var(--glass-ink);
+    background: rgb(255 255 255 / 4%);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.expense-category-options input[type="radio"]:checked + .category-chip {
+    color: #ffb443;
+    background: rgb(255 180 67 / 12%);
+    border-color: #ffb443;
+    font-weight: 600;
+}
+
+.category-chip:hover {
+    border-color: #ffb443;
+}
+
+.expense-category-options input[type="radio"]:focus-visible + .category-chip {
+    outline: 2px solid #ffb443;
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   SAVE EXPENSE BUTTON
+========================================= */
+
+.expense-submit-button {
+    display: block;
+    width: 100%;
+    min-height: 45px;
+    padding: 10px 16px;
+    color: #17122d;
+    background: #ffb443;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .expense-submit-button:hover {
+        background: #ffc46b;
+    }
+
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-wrap {
+        padding: 25px 16px;
+    }
+
+    .dashboard-container {
+        padding: 24px;
+        border-radius: 26px;
+    }
+
+    .countdown-card .card-body {
+        padding: 23px 24px;
+    }
+
+    .daily-card .card-body {
+        padding: 18px 24px;
+    }
+
+    .expense-card .card-body {
+        padding: 23px 24px;
+    }
+
+    .balance-amount {
+        font-size: clamp(30px, 5vw, 40px);
+    }
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 576px) {
+
+    .dashboard-wrap {
+        padding: 16px 12px;
+    }
+
+    .dashboard-container {
+        padding: 16px;
+        gap: 14px;
+        border-radius: 22px;
+    }
+
+    .dashboard-topbar {
+        gap: 10px;
+    }
+
+    .dashboard-brand {
+        gap: 9px;
+    }
+
+        .dashboard-brand h2 {
+            font-size: 22px;
+        }
+
+    .brand-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+    }
+
+        .brand-icon svg {
+            width: 21px;
+            height: 21px;
+        }
+
+    .profile-button {
+        width: 36px;
+        height: 36px;
+    }
+
+
+    /* Balance Card */
+
+    .countdown-card .card-body {
+        padding: 21px 18px;
+    }
+
+    .balance-header {
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .balance-label {
+        font-size: 13px;
+    }
+
+    .balance-amount {
+        font-size: clamp(27px, 7vw, 34px);
+    }
+
+    .initial-balance {
+        font-size: 11px;
+    }
+
+    .balance-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+    }
+
+        .balance-icon svg {
+            width: 21px;
+            height: 21px;
+        }
+
+    .balance-period {
+        font-size: 11px;
+        padding-bottom: 14px;
+        margin-bottom: 14px;
+    }
+
+    .section-title {
+        font-size: 13px;
+    }
+
+    .usage-percentage {
+        font-size: 13px;
+    }
+
+    .usage-progress {
+        height: 8px;
+    }
+
+    .usage-information {
+        font-size: 10px;
+    }
+
+
+    /* Daily Card */
+
+    .daily-card .card-body {
+        padding: 17px 18px;
+    }
+
+    .daily-title {
+        font-size: 14px;
+    }
+
+    .daily-icon {
+        width: 33px;
+        height: 33px;
+    }
+
+        .daily-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+    .daily-amount {
+        font-size: 25px;
+        margin-bottom: 11px;
+    }
+
+    .daily-information {
+        font-size: 10px;
+    }
+
+
+    /* Expense Card */
+
+    .expense-card .card-body {
+        padding: 21px 18px;
+    }
+
+    .expense-title {
+        font-size: 17px;
+        margin-bottom: 18px;
+    }
+
+    .expense-form-group {
+        margin-bottom: 15px;
+    }
+
+    .expense-label {
+        font-size: 12px;
+    }
+
+    .expense-input {
+        height: 43px;
+        font-size: 12px;
+    }
+
+    .expense-category-options {
+        gap: 8px;
+    }
+
+    .category-chip {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+
+    .expense-submit-button {
+        min-height: 43px;
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+    .dashboard-wrap {
+        padding: 12px 8px;
+    }
+
+    .dashboard-container {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .countdown-card .card-body,
+    .daily-card .card-body,
+    .expense-card .card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .balance-amount {
+        font-size: 27px;
+    }
+
+    .initial-balance {
+        font-size: 10px;
+    }
+
+    .balance-period {
+        font-size: 10px;
+    }
+
+    .usage-information,
+    .daily-information {
+        font-size: 9px;
+    }
+
+    .category-chip {
+        padding: 7px 12px;
+        font-size: 11px;
+    }
+}
+
+/* =========================================
+   EXPENSE HISTORY SECTION
+========================================= */
+
+.history-section {
+    width: 100%;
+    min-width: 0;
+    margin-top: 4px;
+}
+
+
+/* History Heading */
+
+.history-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.history-title {
+    color: var(--glass-ink);
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.history-hint {
+    color: var(--glass-ink-soft);
+    font-size: 11px;
+}
+
+
+/* =========================================
+   HORIZONTAL SCROLL
+========================================= */
+
+.history-scroll {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px 2px 14px;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 180 67 / 55%) rgb(255 255 255 / 8%);
+}
+
+
+    /* Chrome, Edge, Safari */
+
+    .history-scroll::-webkit-scrollbar {
+        height: 7px;
+    }
+
+    .history-scroll::-webkit-scrollbar-track {
+        background: rgb(255 255 255 / 8%);
+        border-radius: 20px;
+    }
+
+    .history-scroll::-webkit-scrollbar-thumb {
+        background: rgb(255 180 67 / 55%);
+        border-radius: 20px;
+    }
+
+        .history-scroll::-webkit-scrollbar-thumb:hover {
+            background: #ffb443;
+        }
+
+
+/* =========================================
+   HISTORY DAY CARD
+========================================= */
+
+.history-day-card {
+    flex: 0 0 270px;
+    width: 270px !important;
+    min-width: 270px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    --bs-card-bg: rgb(15 18 43 / 48%);
+    --bs-card-border-color: var(--glass-border);
+    --bs-card-border-radius: 18px;
+    --bs-card-color: var(--glass-ink);
+    background: linear-gradient( 145deg, rgb(255 255 255 / 6%), rgb(255 255 255 / 1.5%) ), rgb(15 18 43 / 48%);
+}
+
+    .history-day-card .card-body {
+        display: flex;
+        flex-direction: column;
+        padding: 18px;
+    }
+
+
+/* =========================================
+   HISTORY CARD HEADER
+========================================= */
+
+.history-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 13px;
+    margin-bottom: 13px;
+    border-bottom: 1px solid rgb(255 255 255 / 12%);
+}
+
+.history-date {
+    color: var(--glass-ink);
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.history-item-count {
+    color: var(--glass-ink-soft);
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   EXPENSE LIST
+========================================= */
+
+.history-expense-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.history-expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.history-expense-details {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.history-expense-name {
+    color: var(--glass-ink);
+    font-size: 13px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.history-expense-category {
+    color: var(--glass-ink-soft);
+    font-size: 11px;
+}
+
+.history-expense-amount {
+    flex-shrink: 0;
+    color: var(--glass-ink);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   SEE MORE LINK
+========================================= */
+
+.history-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+    padding-top: 11px;
+    border-top: 1px solid rgb(255 255 255 / 10%);
+}
+
+.history-see-link {
+    color: #ffb443;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+    .history-see-link:hover {
+        color: #ffc46b;
+        text-decoration: underline;
+    }
+
+
+/* =========================================
+   HISTORY RESPONSIVE
+========================================= */
+
+@media (max-width: 576px) {
+
+    .history-heading {
+        margin-bottom: 12px;
+    }
+
+    .history-title {
+        font-size: 17px;
+    }
+
+    .history-hint {
+        font-size: 10px;
+    }
+
+    .history-scroll {
+        gap: 11px;
+    }
+
+    .history-day-card {
+        flex-basis: 250px;
+        width: 250px !important;
+        min-width: 250px;
+    }
+
+        .history-day-card .card-body {
+            padding: 16px;
+        }
+
+    .history-date {
+        font-size: 14px;
+    }
+
+    .history-expense-name {
+        font-size: 12px;
+    }
+
+    .history-expense-amount {
+        font-size: 11px;
+    }
+}
