@@ -17,6 +17,7 @@ namespace WalletDiet.Controllers
 {
     public class AccountController : Controller
     {
+/*----------------------------------------------- Dependency Injection (DI) -----------------------------------------------------------------------------*/
         private readonly AppDbContext _context;
         private readonly EmailService _emailService;
         private readonly ILogger<AccountController> _logger;
@@ -30,7 +31,7 @@ namespace WalletDiet.Controllers
             _environment = environment;
         }
 
-/*----------------------------------------------- Login Method --------------------------------------------------------------------------------*/
+/*----------------------------------------------- Login Method -----------------------------------------------------------------------------*/
         [HttpGet]
         public IActionResult Login(string? returnUrl)
         {
@@ -100,7 +101,7 @@ namespace WalletDiet.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-/*----------------------------------------------- Acces Denied Method --------------------------------------------------------------------------------*/
+/*----------------------------------------------- Acces Denied Method ---------------------------------------------------------------------------*/
         [HttpGet]
         public IActionResult AccesDenied()
         {

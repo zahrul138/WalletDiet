@@ -1,0 +1,454 @@
+﻿
+/* ==========================================
+   CREATE BUDGET CONTAINER
+========================================== */
+
+.budget-container {
+    gap: 25px;
+    max-width: 760px;
+    width: 100%;
+}
+
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+.budget-navigation {
+    width: 100%;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--glass-ink-soft);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+    .back-link:hover {
+        color: var(--glass-ink);
+    }
+
+    .back-link span {
+        font-size: 1.2rem;
+    }
+
+
+/* ==========================================
+   HEADING
+========================================== */
+
+.budget-heading {
+    width: 100%;
+}
+
+.budget-eyebrow {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--glass-ink-soft);
+}
+
+.budget-heading h1 {
+    margin: 0 0 10px;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--glass-ink);
+}
+
+.budget-heading p {
+    margin: 0;
+    max-width: 520px;
+    color: var(--glass-ink-soft);
+    font-size: 0.91rem;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   FORM
+========================================== */
+
+.budget-form {
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+    .budget-form .form-group {
+        width: 100%;
+        margin: 0;
+    }
+
+    .budget-form label {
+        display: block;
+        margin-bottom: 9px;
+        color: var(--glass-ink);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .budget-form .form-control {
+        width: 100%;
+        min-height: 48px;
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.055);
+        color: var(--glass-ink);
+        padding: 12px 15px;
+        font-size: 0.95rem;
+        box-shadow: none;
+        transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .budget-form .form-control:focus {
+            border-color: rgba(130, 170, 255, 0.65);
+            background: rgba(255, 255, 255, 0.085);
+            box-shadow: 0 0 0 3px rgba(100, 140, 255, 0.12);
+            outline: none;
+        }
+
+        .budget-form .form-control::placeholder {
+            color: var(--glass-ink-soft);
+            opacity: 0.65;
+        }
+
+
+/* ==========================================
+   CURRENCY INPUT
+========================================== */
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+    .input-wrapper .input-prefix {
+        position: absolute;
+        left: 15px;
+        z-index: 1;
+        color: var(--glass-ink-soft);
+        font-size: 0.95rem;
+        font-weight: 600;
+        pointer-events: none;
+    }
+
+    .input-wrapper .currency-input {
+        padding-left: 45px;
+        font-variant-numeric: tabular-nums;
+    }
+
+
+/* ==========================================
+   DATE FIELDS
+========================================== */
+
+.date-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.budget-form input[type="date"] {
+    color-scheme: dark;
+}
+
+.period-hint {
+    margin-top: -15px;
+}
+
+
+/* ==========================================
+   HINTS AND VALIDATION
+========================================== */
+
+.field-hint {
+    display: block;
+    
+    color: var(--glass-ink-soft);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.field-error {
+    display: block;
+    margin-top: 7px;
+    color: #ff8f9b;
+    font-size: 0.8rem;
+}
+
+.validation-summary {
+    color: #ff8f9b;
+    font-size: 0.85rem;
+}
+
+    .validation-summary:empty {
+        display: none;
+    }
+
+    .validation-summary ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+
+/* ==========================================
+   ALLOWANCE SECTION
+========================================== */
+
+.allowance-section {
+    margin-top: 2px !important;
+}
+
+.section-label {
+    margin-bottom: 5px !important;
+}
+
+.section-description {
+    margin: 0 0 14px;
+    color: var(--glass-ink-soft);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.allowance-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.allowance-option {
+    position: relative;
+    display: flex !important;
+    align-items: flex-start;
+    gap: 11px;
+    min-height: 112px;
+    margin: 0 !important;
+    padding: 16px;
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.035);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+    .allowance-option:hover {
+        background: rgba(255, 255, 255, 0.075);
+        transform: translateY(-2px);
+    }
+
+    .allowance-option:has(input:checked) {
+        border-color: rgba(130, 170, 255, 0.7);
+        background: rgba(100, 140, 255, 0.10);
+    }
+
+    .allowance-option input[type="radio"] {
+        flex-shrink: 0;
+        width: 17px;
+        height: 17px;
+        margin-top: 3px;
+        accent-color: #8daeff;
+    }
+
+.option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.option-title {
+    color: var(--glass-ink);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.option-description {
+    color: var(--glass-ink-soft);
+    font-size: 0.77rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   CUSTOM ALLOWANCE
+========================================== */
+
+.custom-allowance-group {
+    display: none;
+}
+
+    .custom-allowance-group.is-visible {
+        display: block;
+        animation: allowanceFadeIn 0.25s ease;
+    }
+
+@keyframes allowanceFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================
+   FORM ACTIONS
+========================================== */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.btn-cancel,
+.btn-create {
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 22px;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-cancel {
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--glass-ink-soft);
+}
+
+    .btn-cancel:hover {
+        background: rgba(255, 255, 255, 0.09);
+        color: var(--glass-ink);
+    }
+
+.btn-create {
+    border: 1px solid rgba(150, 180, 255, 0.3);
+    background: rgba(115, 150, 255, 0.22);
+    color: var(--glass-ink);
+    cursor: pointer;
+}
+
+    .btn-create:hover {
+        background: rgba(115, 150, 255, 0.34);
+        transform: translateY(-2px);
+    }
+
+    .btn-create span {
+        font-size: 1.1rem;
+    }
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 600px) {
+
+    .budget-container {
+        padding: 25px 20px;
+        gap: 22px;
+    }
+
+    .date-fields {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .allowance-options {
+        grid-template-columns: 1fr;
+    }
+
+    .allowance-option {
+        min-height: auto;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .btn-cancel,
+    .btn-create {
+        width: 100%;
+    }
+}
+
+
+/* ==========================================
+   WALLETDIET GOLDEN AMBER ACCENT
+========================================== */
+
+/* Input focus */
+.budget-form .form-control:focus {
+    border-color: #ffb443;
+    box-shadow: 0 0 0 3px rgba(255, 180, 67, 0.13);
+}
+
+/* Currency prefix */
+.input-wrapper .input-prefix {
+    color: #ffb443;
+}
+
+/* Allowance selected option */
+.allowance-option:has(input:checked) {
+    border-color: rgba(255, 180, 67, 0.65);
+    background: rgba(255, 180, 67, 0.09);
+    box-shadow: 0 0 12px rgba(255, 180, 67, 0.07);
+}
+
+/* Radio button */
+.allowance-option input[type="radio"] {
+    accent-color: #ffb443;
+}
+
+/* Allowance hover */
+.allowance-option:hover {
+    border-color: rgba(255, 180, 67, 0.4);
+}
+
+/* Primary button */
+.btn-create {
+    border: 1px solid rgba(255, 180, 67, 0.45);
+    background: linear-gradient(90deg, #f59e0b, #ffb443);
+    color: #17122d;
+    box-shadow: 0 0 12px rgba(255, 180, 67, 0.15);
+}
+
+    .btn-create:hover {
+        background: #ffc46b;
+        color: #17122d;
+        box-shadow: 0 0 18px rgba(255, 180, 67, 0.25);
+    }
+
+/* Heading accent */
+.budget-eyebrow {
+    color: #ffb443;
+}
+
+/* Navigation hover */
+.back-link:hover {
+    color: #ffb443;
+}
+

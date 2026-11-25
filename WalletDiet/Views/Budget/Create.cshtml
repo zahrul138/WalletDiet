@@ -1,0 +1,288 @@
+﻿@model WalletDiet.ViewModels.CreateBudgetViewModel
+
+@{
+    Layout = null;
+
+    var startDateValue = Model?.StartDate != default
+        ? Model.StartDate.ToString("yyyy-MM-dd")
+        : DateTime.Today.ToString("yyyy-MM-dd");
+
+    var targetDateValue = Model?.TargetDate != default
+        ? Model.TargetDate.ToString("yyyy-MM-dd")
+        : "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Create Budget - WalletDiet</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/auth.css" />
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+    <link rel="stylesheet" href="~/css/create-budget.css" />
+</head>
+
+<body data-scene="dark" data-bs-theme="dark">
+
+    <div class="g-scene">
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+    </div>
+
+    <main class="dashboard-wrap">
+
+        <div class="dashboard-container budget-container">
+
+            <!-- Navigation -->
+            @* <div class="budget-navigation">
+                <a asp-controller="Dashboard"
+                   asp-action="Index"
+                   class="back-link">
+                    <span>&larr;</span>
+                    Back to Dashboard
+                </a>
+            </div> *@
+
+            <!-- Heading -->
+            <div class="budget-heading">
+                <span class="budget-eyebrow">NEW FINANCIAL PERIOD</span>
+
+                <h1>Create Your Budget</h1>
+
+                <p>
+                    Set your starting balance and budget period.
+                    Let's make your money last longer.
+                </p>
+            </div>
+
+            <!-- Form -->
+            <form asp-controller="Budget"
+                  asp-action="Create"
+                  method="post"
+                  class="g-form budget-form"
+                  id="createBudgetForm">
+
+                <div asp-validation-summary="ModelOnly"
+                     class="validation-summary">
+                </div>
+
+                <!-- Initial Balance -->
+                <div class="form-group">
+
+                    <label for="initialBalanceDisplay">
+                        Initial Balance
+                    </label>
+
+                    <div class="input-wrapper">
+                        <span class="input-prefix">Rp</span>
+
+                        <input type="text"
+                               id="initialBalanceDisplay"
+                               class="form-control currency-input"
+                               placeholder="00.000.000"
+                               inputmode="numeric"
+                               autocomplete="off" />
+
+                        <input type="hidden"
+                               asp-for="InitialBalance"
+                               id="initialBalanceValue" />
+                    </div>
+
+                    <span asp-validation-for="InitialBalance"
+                          class="field-error">
+                    </span>
+
+                    <small class="field-hint">
+                        Enter the amount of money you currently have.
+                    </small>
+
+                </div>
+
+                <!-- Budget Period -->
+                <div class="date-fields">
+
+                    <!-- Start Date -->
+                    <div class="form-group">
+
+                        <label asp-for="StartDate">
+                            Start Date
+                        </label>
+
+                        <input asp-for="StartDate"
+                               type="date"
+                               class="form-control"
+                               id="startDateInput"
+                               value="@startDateValue" />
+
+                        <span asp-validation-for="StartDate"
+                              class="field-error">
+                        </span>
+
+                    </div>
+
+                    <!-- Target Date -->
+                    <div class="form-group">
+
+                        <label asp-for="TargetDate">
+                            Target Date
+                        </label>
+
+                        <input asp-for="TargetDate"
+                               type="date"
+                               class="form-control"
+                               id="targetDateInput"
+                               value="@targetDateValue" />
+
+                        <span asp-validation-for="TargetDate"
+                              class="field-error">
+                        </span>
+                        
+
+                    </div>
+                    <small class="field-hint period-hint">
+                        Choose when your budget period starts and ends.
+                    </small>
+                </div>
+
+               
+
+                <!-- Daily Allowance -->
+                <div class="form-group allowance-section">
+
+                    <label class="section-label">
+                        Daily Allowance Mode
+                    </label>
+
+                    <p class="section-description">
+                        Choose how you want to manage your daily spending limit.
+                    </p>
+
+                    <div class="allowance-options">
+
+                        <!-- Recommended -->
+                        <label class="allowance-option">
+
+                            <input asp-for="AllowanceMode"
+                                   type="radio"
+                                   value="Recommended"
+                                   id="recommendedOption" />
+
+                            <span class="option-content">
+
+                                <span class="option-title">
+                                    Recommended
+                                </span>
+
+                                <span class="option-description">
+                                    Automatically calculate your daily allowance
+                                    based on your remaining balance and days.
+                                </span>
+
+                            </span>
+
+                        </label>
+
+                        <!-- Custom -->
+                        <label class="allowance-option">
+
+                            <input asp-for="AllowanceMode"
+                                   type="radio"
+                                   value="Custom"
+                                   id="customOption" />
+
+                            <span class="option-content">
+
+                                <span class="option-title">
+                                    Custom
+                                </span>
+
+                                <span class="option-description">
+                                    Set your own daily spending limit.
+                                </span>
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                    <span asp-validation-for="AllowanceMode"
+                          class="field-error">
+                    </span>
+
+                </div>
+
+                <!-- Custom Daily Allowance -->
+                <div class="form-group custom-allowance-group"
+                     id="customAllowanceGroup">
+
+                    <label for="customAllowanceDisplay">
+                        Custom Daily Allowance
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-prefix">Rp</span>
+
+                        <input type="text"
+                               id="customAllowanceDisplay"
+                               class="form-control currency-input"
+                               placeholder="100.000"
+                               inputmode="numeric"
+                               autocomplete="off" />
+
+                        <input type="hidden"
+                               asp-for="CustomDailyAllowance"
+                               id="customAllowanceValue" />
+
+                    </div>
+
+                    <span asp-validation-for="CustomDailyAllowance"
+                          class="field-error">
+                    </span>
+
+                    <small class="field-hint">
+                        You can change this allowance later.
+                    </small>
+
+                </div>
+
+                <!-- Actions -->
+                <div class="form-actions">
+
+                    <a asp-controller="Dashboard"
+                       asp-action="Dashboard"
+                       class="btn-cancel">
+                        Back
+                    </a>
+
+                    <button type="submit" class="btn-create">
+                        Create Budget
+                        <span>&rarr;</span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script>
+
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/create-budget.js" asp-append-version="true"></script>
+
+</body>
+</html>
