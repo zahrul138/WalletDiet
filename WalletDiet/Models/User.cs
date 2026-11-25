@@ -10,6 +10,8 @@ namespace WalletDiet.Models
         public string Role { get; set; }
         public string Email { get; set; }
         public string? ProfilePicture { get; set; }
+
+        public ICollection<Budget> Budgets { get; set; } = new List<Budget>();
     }
 }   
 

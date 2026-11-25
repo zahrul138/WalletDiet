@@ -22,6 +22,109 @@ namespace WalletDiet.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("WalletDiet.Models.BalanceTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("BudgetId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BudgetId");
+
+                    b.ToTable("BalanceTransactions");
+                });
+
+            modelBuilder.Entity("WalletDiet.Models.Budget", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AllowanceMode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("CustomDailyAllowance")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("InitialBalance")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Budgets");
+                });
+
+            modelBuilder.Entity("WalletDiet.Models.Expense", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("BudgetId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BudgetId");
+
+                    b.ToTable("Expenses");
+                });
+
             modelBuilder.Entity("WalletDiet.Models.PasswordResetToken", b =>
                 {
                     b.Property<int>("Id")
@@ -85,6 +188,39 @@ namespace WalletDiet.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("WalletDiet.Models.BalanceTransaction", b =>
+                {
+                    b.HasOne("WalletDiet.Models.Budget", "Budget")
+                        .WithMany("BalanceTransactions")
+                        .HasForeignKey("BudgetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Budget");
+                });
+
+            modelBuilder.Entity("WalletDiet.Models.Budget", b =>
+                {
+                    b.HasOne("WalletDiet.Models.User", "User")
+                        .WithMany("Budgets")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WalletDiet.Models.Expense", b =>
+                {
+                    b.HasOne("WalletDiet.Models.Budget", "Budget")
+                        .WithMany("Expenses")
+                        .HasForeignKey("BudgetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Budget");
+                });
+
             modelBuilder.Entity("WalletDiet.Models.PasswordResetToken", b =>
                 {
                     b.HasOne("WalletDiet.Models.User", "User")
@@ -94,6 +230,18 @@ namespace WalletDiet.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WalletDiet.Models.Budget", b =>
+                {
+                    b.Navigation("BalanceTransactions");
+
+                    b.Navigation("Expenses");
+                });
+
+            modelBuilder.Entity("WalletDiet.Models.User", b =>
+                {
+                    b.Navigation("Budgets");
                 });
 #pragma warning restore 612, 618
         }
