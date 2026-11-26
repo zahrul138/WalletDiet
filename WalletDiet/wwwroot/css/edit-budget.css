@@ -1,0 +1,57 @@
+﻿
+/* ==========================================
+   EDIT BUDGET
+========================================== */
+
+/* Active Budget Information */
+
+.edit-status-hint {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: -10px;
+    color: var(--glass-ink-soft);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+    .edit-status-hint span {
+        flex-shrink: 0;
+        color: #ffb443;
+        font-size: 0.95rem;
+    }
+
+/* Readonly Start Date */
+
+.budget-form input[type="date"][readonly] {
+    cursor: not-allowed;
+    opacity: 0.6;
+    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.025);
+}
+
+/* Custom Allowance */
+
+.budget-form .custom-allowance-group {
+    display: none;
+}
+
+    .budget-form .custom-allowance-group.is-visible {
+        display: block;
+        animation: allowanceFadeIn 0.25s ease;
+    }
+
+/* Validation */
+
+.budget-form .validation-summary {
+    margin-bottom: 0;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+
+    .edit-status-hint {
+        margin-top: -8px;
+    }
+}
