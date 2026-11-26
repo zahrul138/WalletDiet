@@ -4,6 +4,7 @@
 @{
     Layout = null;
     var culture = CultureInfo.GetCultureInfo("id-ID");
+    var budgets = Model ?? Enumerable.Empty<WalletDiet.Models.Budget>();
 }
 
 <!DOCTYPE html>
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="~/css/dashboard.css" />
     <link rel="stylesheet" href="~/css/my-budgets.css" />
 </head>
+
 <body data-scene="dark">
 
     <div class="g-scene"></div>
@@ -36,13 +38,13 @@
                 </a>
             </div>
 
-            <!-- Main Glass Container -->
+            <!-- Page Content -->
             <section class="budgets-glass">
 
                 <!-- Page Header -->
                 <div class="budgets-header">
                     <div>
-                        <span class="budgets-eyebrow">WALLETDiet MANAGEMENT</span>
+                        <span class="budgets-eyebrow">WALLETDIET MANAGEMENT</span>
                         <h1>My Budgets</h1>
                         <p>Manage your spending periods and track your budget history.</p>
                     </div>
@@ -57,11 +59,12 @@
 
                 <!-- Budget Filters -->
                 <div class="budget-filters">
+
                     <button type="button"
                             class="filter-btn active"
                             data-filter="all">
                         All
-                        <span class="filter-count">@((Model ?? Enumerable.Empty<WalletDiet.Models.Budget>()).Count())</span>
+                        <span class="filter-count">@budgets.Count()</span>
                     </button>
 
                     <button type="button"
@@ -81,14 +84,15 @@
                             data-filter="completed">
                         Completed
                     </button>
+
                 </div>
 
                 <!-- Budget List -->
                 <div class="budgets-list" id="budgetsList">
 
-                    @if (Model != null && Model.Any())
+                    @if (budgets.Any())
                     {
-                        foreach (var budget in Model)
+                        foreach (var budget in budgets)
                         {
                             var status = (budget.Status ?? "").ToLowerInvariant();
 
@@ -157,12 +161,13 @@
                                               asp-action="Delete"
                                               asp-route-id="@budget.Id"
                                               method="post"
-                                              class="delete-budget-form"
-                                              onsubmit="return confirm('Are you sure you want to delete this upcoming budget?');">
+                                              class="delete-budget-form">
 
-                                            <button type="submit" class="budget-delete-btn">
+                                            <button type="button"
+                                                    class="budget-delete-btn">
                                                 Delete
                                             </button>
+
                                         </form>
                                     }
 
@@ -198,71 +203,52 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    <!-- Delete Confirmation Modal -->
+    <div class="delete-modal-overlay"
+         id="deleteModal"
+         aria-hidden="true"
+         hidden>
 
-            const filterButtons = document.querySelectorAll(".filter-btn");
-            const budgetCards = document.querySelectorAll(".budget-card");
-            const filterEmpty = document.getElementById("filterEmpty");
+        <div class="delete-modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="deleteModalTitle">
 
-            const filters = ["active", "upcoming", "completed"];
+            <div class="delete-modal-icon">
+                <span>!</span>
+            </div>
 
-            // Update filter counts
-            filters.forEach(function (status) {
-                const count = document.querySelectorAll(
-                    `.budget-card[data-status="${status}"]`
-                ).length;
+            <div class="delete-modal-content">
+                <span class="delete-modal-eyebrow">CONFIRMATION</span>
 
-                const button = document.querySelector(
-                    `.filter-btn[data-filter="${status}"]`
-                );
+                <h2 id="deleteModalTitle">Delete This Budget?</h2>
 
-                if (button) {
-                    button.insertAdjacentHTML(
-                        "beforeend",
-                        `<span class="filter-count">${count}</span>`
-                    );
-                }
-            });
+                <p>
+                    Are you sure you want to delete this upcoming budget?
+                    This action cannot be undone.
+                </p>
+            </div>
 
-            // Filter budgets
-            filterButtons.forEach(function (button) {
+            <div class="delete-modal-actions">
 
-                button.addEventListener("click", function () {
+                <button type="button"
+                        class="delete-modal-cancel"
+                        id="cancelDelete">
+                    Cancel
+                </button>
 
-                    const selectedFilter = this.dataset.filter;
-                    let visibleCount = 0;
+                <button type="button"
+                        class="delete-modal-confirm"
+                        id="confirmDelete">
+                    Delete Budget
+                </button>
 
-                    filterButtons.forEach(function (item) {
-                        item.classList.remove("active");
-                    });
+            </div>
 
-                    this.classList.add("active");
+        </div>
+    </div>
 
-                    budgetCards.forEach(function (card) {
-
-                        const status = card.dataset.status;
-
-                        const shouldShow =
-                            selectedFilter === "all" ||
-                            selectedFilter === status;
-
-                        card.hidden = !shouldShow;
-
-                        if (shouldShow) {
-                            visibleCount++;
-                        }
-                    });
-
-                    if (filterEmpty) {
-                        filterEmpty.hidden =
-                            budgetCards.length === 0 || visibleCount > 0;
-                    }
-                });
-            });
-
-        });
-    </script>
+    <script src="~/js/my-budgets.js" asp-append-version="true"></script>
 
 </body>
 </html>

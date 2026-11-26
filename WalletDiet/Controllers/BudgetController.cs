@@ -249,5 +249,30 @@ namespace WalletDiet.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("MyBudgets", "Budget");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdValue, out var userId))
+            {
+                return Unauthorized();
+            }
+
+            var budget = await _context.Budgets.FirstOrDefaultAsync(b => b.Id == id && b.UserId == userId);
+            if (budget == null)
+            {
+                return NotFound();
+            }
+
+            if (budget.Status != "Upcoming")
+            {
+                return Forbid();
+            }
+
+            _context.Budgets.Remove(budget);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("MyBudgets", "Budget");
+        }
     }
 }
