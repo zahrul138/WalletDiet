@@ -1043,3 +1043,217 @@ body {
         font-size: 11px;
     }
 }
+
+
+/* Expense Currency Input */
+.expense-card .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.expense-card .input-wrapper .input-prefix {
+    position: absolute;
+    left: 15px;
+    color: #ffb443;
+    z-index: 2;
+}
+
+.expense-card .input-wrapper .currency-input {
+    padding-left: 45px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Expense Validation Messages */
+.expense-card .field-error {
+    display: block;
+    margin-top: 7px;
+    color: #ff8f9b;
+    font-size: 0.8rem;
+}
+
+
+/* Glass Success Toast */
+.success-toast {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 14px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    animation: toastFade 3s ease forwards;
+}
+
+/* Green Check Icon */
+.success-toast-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(46, 204, 113, 0.15);
+    border: 1px solid rgba(46, 204, 113, 0.35);
+    border-radius: 50%;
+    color: #4ade80;
+}
+
+    .success-toast-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+/* Toast Animation */
+@keyframes toastFade {
+    0% {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    10%, 75% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+}
+
+.history-expense-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.delete-expense-form {
+    display: flex;
+    margin: 0;
+}
+
+.delete-expense-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    color: #a1a1aa;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.delete-expense-btn svg {
+    width: 17px;
+    height: 17px;
+}
+
+.delete-expense-btn:hover {
+    color: #ef4444;
+}
+
+.delete-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 99999;
+}
+
+    .delete-modal.active {
+        display: flex;
+    }
+
+.delete-modal-content {
+    width: 100%;
+    max-width: 380px;
+    padding: 30px;
+    text-align: center;
+    background: rgba(30, 30, 35, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+}
+
+.delete-modal-icon {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.12);
+    border-radius: 50%;
+}
+
+    .delete-modal-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+.delete-modal-content h3 {
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.delete-modal-content p {
+    color: #a1a1aa;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.delete-modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+    .delete-modal-actions button {
+        flex: 1;
+        padding: 11px;
+        border-radius: 9px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+#cancelDeleteExpense {
+    color: #d4d4d8;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+    #cancelDeleteExpense:hover {
+        background: rgba(255, 255, 255, 0.13);
+    }
+
+#confirmDeleteExpense {
+    color: white;
+    background: #dc4444;
+    border: 1px solid #dc4444;
+}
+
+    #confirmDeleteExpense:hover {
+        background: #b91c1c;
+    }

@@ -1,0 +1,289 @@
+﻿@model WalletDiet.ViewModels.BalanceTransactionViewModel
+@using WalletDiet.Models
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Balance Management - WalletDiet</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/auth.css" />
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+    <link rel="stylesheet" href="~/css/balance-management.css" />
+</head>
+
+<body>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="success-toast" id="successToast">
+            <div class="success-toast-icon">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2.5"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <path d="M5 12l4 4L19 6" />
+                </svg>
+            </div>
+
+            <span>@TempData["SuccessMessage"]</span>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="error-toast" id="errorToast">
+            <div class="error-toast-icon">!</div>
+            <span>@TempData["ErrorMessage"]</span>
+        </div>
+    }
+
+    <div data-scene="dark" data-bs-theme="dark">
+        <div class="g-scene">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+        </div>
+
+        <div class="dashboard-wrap">
+            <main class="dashboard-container balance-container">
+
+                <!-- Page Header -->
+                <section class="balance-heading">
+                    <a asp-controller="Dashboard"
+                       asp-action="Dashboard"
+                       class="balance-back-link">
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="1.8"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path d="M19 12H5" />
+                            <path d="m12 19-7-7 7-7" />
+                        </svg>
+                        Back to Dashboard
+                    </a>
+
+                    <h2>Balance Management</h2>
+                    <p>Manage your budget balance and transactions.</p>
+                </section>
+
+                <!-- Current Balance -->
+                <section class="card balance-overview">
+                    <div class="card-body">
+                        <span class="balance-label">CURRENT BALANCE</span>
+
+                        <h1>
+                            @Model.CurrentBalance.ToString("C0",
+                            System.Globalization.CultureInfo.GetCultureInfo("id-ID"))
+                        </h1>
+
+                        <p>Available balance in your active budget</p>
+                    </div>
+                </section>
+
+                <!-- Balance Actions -->
+                <section class="balance-actions">
+
+                    <button type="button"
+                            class="card g-glass balance-action-card add-balance"
+                            id="addBalanceBtn">
+                        <div class="balance-action-icon">+</div>
+                        <div>
+                            <h5>Add Balance</h5>
+                            <p>Add money to your budget</p>
+                        </div>
+                    </button>
+
+                    <button type="button"
+                            class="card g-glass balance-action-card remove-balance"
+                            id="removeBalanceBtn">
+                        <div class="balance-action-icon">−</div>
+                        <div>
+                            <h5>Remove Balance</h5>
+                            <p>Withdraw money from your budget</p>
+                        </div>
+                    </button>
+
+                </section>
+
+                <!-- Transaction History -->
+                <section class="balance-history">
+                    <div class="balance-history-heading">
+                        <h4>Transaction History</h4>
+                        <span>Recent transactions</span>
+                    </div>
+
+                    @if (Model.Transactions.Any())
+                    {
+                        <div class="balance-transaction-list">
+                            @foreach (var transaction in Model.Transactions)
+                            {
+                                <div class="balance-transaction-item">
+                                    <div class="transaction-info">
+                                        <div class="transaction-icon @(transaction.Type == BalanceTransactionType.Add ? "add" : "remove")">
+                                            @(transaction.Type == BalanceTransactionType.Add ? "+" : "−")
+                                        </div>
+
+                                        <div>
+                                            <h6>
+                                                @(transaction.Type == BalanceTransactionType.Add
+                                                                                        ? "Balance Added"
+                                                                                        : "Balance Removed")
+                                                                                                        </h6>
+
+                                            <p>
+                                                @(string.IsNullOrWhiteSpace(transaction.Description)
+                                                                                        ? "No description"
+                                                                                        : transaction.Description)
+                                    </p>
+
+                                            <small>
+                                                @transaction.CreatedAt.ToString("dd MMM yyyy, HH:mm")
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <span class="transaction-amount @(transaction.Type == BalanceTransactionType.Add ? "positive" : "negative")">
+                                        @(transaction.Type == BalanceTransactionType.Add ? "+" : "−")
+                                        @transaction.Amount.ToString("C0", System.Globalization.CultureInfo.GetCultureInfo("id-ID"))
+                                    </span>
+                                </div>
+                                                }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card balance-empty-state">
+                            <p>No transactions available yet.</p>
+                        </div>
+                    }
+                </section>
+
+
+            </main>
+        </div>
+    </div>
+
+    <div class="balance-modal" id="addBalanceModal">
+        <div class="balance-modal-content">
+            <h4>Add Balance</h4>
+            <p>Add money to your current budget.</p>
+
+            <form asp-controller="Balance"
+                  asp-action="Add"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label for="addAmountDisplay">Amount</label>
+
+                    <div class="input-wrapper">
+                        <span class="input-prefix">Rp</span>
+
+                        <input type="text"
+                               id="addAmountDisplay"
+                               class="form-control currency-input"
+                               placeholder="00.000.000"
+                               inputmode="numeric"
+                               autocomplete="off"
+                               required />
+
+                        <input type="hidden"
+                               name="Amount"
+                               id="addAmountValue" />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="addDescription">Description</label>
+                    <input type="text"
+                           id="addDescription"
+                           name="Description"
+                           class="form-control"
+                           maxlength="200"
+                           placeholder="Optional description" />
+                </div>
+
+                <div class="balance-modal-actions">
+                    <button type="button" id="cancelAddBalance">
+                        Cancel
+                    </button>
+
+                    <button type="submit">
+                        Add Balance
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="balance-modal" id="removeBalanceModal">
+        <div class="balance-modal-content">
+            <h4>Remove Balance</h4>
+            <p>Withdraw money from your current budget.</p>
+
+            <form asp-controller="Balance"
+                  asp-action="Remove"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label for="removeAmountDisplay">Amount</label>
+
+                    <div class="input-wrapper">
+                        <span class="input-prefix">Rp</span>
+
+                        <input type="text"
+                               id="removeAmountDisplay"
+                               class="form-control currency-input"
+                               placeholder="00.000.000"
+                               inputmode="numeric"
+                               autocomplete="off"
+                               required />
+
+                        <input type="hidden"
+                               name="Amount"
+                               id="removeAmountValue" />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="removeDescription">Description</label>
+
+                    <input type="text"
+                           id="removeDescription"
+                           name="Description"
+                           class="form-control"
+                           maxlength="200"
+                           placeholder="Optional description" />
+                </div>
+
+                <div class="balance-modal-actions">
+                    <button type="button" id="cancelRemoveBalance">
+                        Cancel
+                    </button>
+
+                    <button type="submit">
+                        Remove Balance
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="~/js/balance-management.js"></script>
+</body>
+</html>

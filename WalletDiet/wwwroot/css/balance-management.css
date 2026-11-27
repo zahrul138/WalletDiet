@@ -1,0 +1,618 @@
+﻿
+/* ================================
+   BALANCE MANAGEMENT
+================================ */
+
+.balance-container {
+    gap: 18px;
+}
+
+/* Page Heading */
+
+.balance-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.balance-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    margin-bottom: 8px;
+    color: var(--glass-ink-soft);
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.balance-back-link svg {
+    width: 15px;
+    height: 15px;
+}
+
+.balance-back-link:hover {
+    color: #ffb443;
+}
+
+.balance-heading h2 {
+    margin: 0;
+    color: var(--glass-ink);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.balance-heading p {
+    margin: 0;
+    color: var(--glass-ink-soft);
+    font-size: 13px;
+}
+
+/* Shared Balance Cards */
+
+.balance-overview,
+.balance-action-card,
+.balance-empty-state {
+    width: 100% !important;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    --bs-card-bg: rgb(15 18 43 / 48%);
+    --bs-card-border-color: var(--glass-border);
+    --bs-card-border-radius: 22px;
+    --bs-card-color: var(--glass-ink);
+    background: linear-gradient( 145deg, rgb(255 255 255 / 7%), rgb(255 255 255 / 1.5%) ), rgb(15 18 43 / 48%);
+    border: 1px solid var(--glass-border);
+    color: var(--glass-ink);
+}
+
+/* Current Balance */
+
+.balance-overview .card-body {
+    padding: 26px 30px;
+}
+
+.balance-label {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--glass-ink-soft);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+}
+
+.balance-overview h1 {
+    margin: 0 0 8px;
+    color: var(--glass-ink);
+    font-size: clamp(30px, 5vw, 40px);
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.balance-overview p {
+    margin: 0;
+    color: var(--glass-ink-soft);
+    font-size: 13px;
+}
+
+/* Balance Actions */
+
+.balance-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+}
+
+.balance-action-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.balance-action-card:hover {
+    transform: translateY(-2px);
+    border-color: rgb(255 180 67 / 45%);
+}
+
+.balance-action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 13px;
+}
+
+.balance-action-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.add-balance .balance-action-icon {
+    color: #4ade80;
+    background: rgb(46 204 113 / 12%);
+}
+
+.remove-balance .balance-action-icon {
+    color: #fb7185;
+    background: rgb(239 68 68 / 12%);
+}
+
+.balance-action-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.balance-action-content strong {
+    color: var(--glass-ink);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.balance-action-content small {
+    color: var(--glass-ink-soft);
+    font-size: 12px;
+}
+
+/* Transaction History */
+
+.balance-history {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    min-width: 0;
+}
+
+.balance-history-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.balance-history-heading h4 {
+    margin: 0;
+    color: var(--glass-ink);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.balance-history-heading span {
+    color: var(--glass-ink-soft);
+    font-size: 11px;
+}
+
+.balance-empty-state p {
+    margin: 0;
+    padding: 28px 15px;
+    color: var(--glass-ink-soft);
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .balance-overview .card-body {
+        padding: 23px 24px;
+    }
+
+    .balance-action-card {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .balance-container {
+        gap: 14px;
+    }
+
+    .balance-heading h2 {
+        font-size: 19px;
+    }
+
+    .balance-actions {
+        grid-template-columns: 1fr;
+        gap: 11px;
+    }
+
+    .balance-overview .card-body {
+        padding: 21px 18px;
+    }
+
+    .balance-overview h1 {
+        font-size: 30px;
+    }
+
+    .balance-action-card {
+        padding: 17px;
+    }
+
+    .balance-history-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Balance Modal */
+.balance-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.65);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.25s ease;
+}
+
+.balance-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.balance-modal-content {
+    width: 100%;
+    max-width: 430px;
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    background: #171a35;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+    transform: translateY(15px);
+    transition: 0.25s ease;
+}
+
+.balance-modal.active .balance-modal-content {
+    transform: translateY(0);
+}
+
+.balance-modal-content h4 {
+    color: #fff;
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.balance-modal-content > p {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 13px;
+    margin-bottom: 24px;
+}
+
+.balance-modal-content label {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.balance-modal-content .form-control {
+    min-height: 45px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+}
+
+.balance-modal-content .form-control:focus {
+    border-color: #8585ff;
+    box-shadow: 0 0 0 3px rgba(133, 133, 255, 0.15);
+}
+
+.balance-modal-content .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.balance-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.balance-modal-actions button {
+    padding: 10px 17px;
+    border: none;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.balance-modal-actions button[type="button"] {
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.balance-modal-actions button[type="submit"] {
+    color: #fff;
+    background: #6868e8;
+}
+
+.balance-modal-actions button[type="submit"]:hover {
+    background: #7777f0;
+}
+
+.balance-action-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+}
+
+.balance-action-card h5 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.balance-action-card p {
+    margin-bottom: 0;
+}
+
+.balance-modal-content .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.balance-modal-content .input-wrapper .input-prefix {
+    position: absolute;
+    left: 15px;
+    z-index: 1;
+    color: #ffb443;
+    font-size: 0.95rem;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.balance-modal-content .input-wrapper .currency-input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 15px 12px 45px;
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+}
+
+.balance-modal-content .input-wrapper .currency-input:focus {
+    border-color: #ffb443;
+    box-shadow: 0 0 0 3px rgba(255, 180, 67, 0.13);
+}
+
+/* ==========================================
+   BALANCE ALERT
+========================================== */
+
+.balance-alert {
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    animation: alertFadeIn 0.3s ease;
+}
+
+.balance-alert.success {
+    color: #75dfa0;
+    background: rgba(46, 204, 113, 0.10);
+    border: 1px solid rgba(46, 204, 113, 0.20);
+}
+
+.balance-alert.error {
+    color: #ff8585;
+    background: rgba(231, 76, 60, 0.10);
+    border: 1px solid rgba(231, 76, 60, 0.20);
+}
+
+@keyframes alertFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================
+   GLASS TOAST NOTIFICATIONS
+========================================== */
+
+.success-toast,
+.error-toast {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 14px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    animation: toastFade 3s ease forwards;
+}
+
+/* Success Icon */
+
+.success-toast-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(46, 204, 113, 0.15);
+    border: 1px solid rgba(46, 204, 113, 0.35);
+    border-radius: 50%;
+    color: #4ade80;
+}
+
+    .success-toast-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+/* Error Icon */
+
+.error-toast-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    border-radius: 50%;
+    color: #f87171;
+    font-weight: 700;
+}
+
+/* Toast Animation */
+
+@keyframes toastFade {
+    0% {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    10%, 75% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+}
+
+
+/* TRANSACTION HISTORY */
+
+.balance-transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.balance-transaction-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+}
+
+.transaction-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.transaction-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.transaction-icon.add {
+    color: #4ade80;
+    background: rgba(46, 204, 113, 0.12);
+}
+
+.transaction-icon.remove {
+    color: #f87171;
+    background: rgba(239, 68, 68, 0.12);
+}
+
+.transaction-info h6 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.transaction-info p {
+    margin: 0 0 4px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.transaction-info small {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.transaction-amount {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.transaction-amount.positive {
+    color: #4ade80;
+}
+
+.transaction-amount.negative {
+    color: #f87171;
+}
+
+@media (max-width: 576px) {
+    .balance-transaction-item {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .transaction-info {
+        gap: 10px;
+    }
+
+    .transaction-amount {
+        font-size: 12px;
+    }
+}

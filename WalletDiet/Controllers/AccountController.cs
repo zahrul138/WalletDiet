@@ -17,7 +17,7 @@ namespace WalletDiet.Controllers
 {
     public class AccountController : Controller
     {
-/*----------------------------------------------- Dependency Injection (DI) -----------------------------------------------------------------------------*/
+/*----------------------------------------------- Dependency Injection (DI) -----------------------------------------------------------------*/
         private readonly AppDbContext _context;
         private readonly EmailService _emailService;
         private readonly ILogger<AccountController> _logger;
