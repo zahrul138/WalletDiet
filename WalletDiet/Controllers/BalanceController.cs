@@ -153,5 +153,28 @@ namespace WalletDiet.Controllers
             TempData["SuccessMessage"] = "Balance removed successfully!";
             return RedirectToAction("Management", "Balance");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> History()
+        {
+            var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdValue, out var userId))
+            {
+                return Unauthorized();
+            }
+
+            var budget = await _context.Budgets.FirstOrDefaultAsync(b => b.UserId == userId && b.Status == "Active");
+            if (budget == null)
+            {
+                return NotFound();
+            }
+
+            List<BalanceTransaction> transactions = await _context.BalanceTransactions
+               .Where(t => t.BudgetId == budget.Id)
+               .OrderByDescending(t => t.CreatedAt)
+               .ToListAsync();
+
+            return View(transactions);
+        }
     }
 }

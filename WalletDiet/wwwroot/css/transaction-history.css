@@ -1,0 +1,91 @@
+﻿
+.history-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 45px 25px;
+}
+
+.history-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.history-subtitle {
+    color: #ffb443;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+.history-heading h2 {
+    color: #fff;
+    font-size: 27px;
+    font-weight: 700;
+    margin: 8px 0;
+}
+
+.history-heading p {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 14px;
+    margin: 0;
+}
+
+.history-back-btn {
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.history-back-btn:hover {
+    color: #ffb443;
+    border-color: #ffb443;
+}
+
+.history-section {
+    padding: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.history-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.history-section-heading h4 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.history-section-heading span {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+}
+
+@media (max-width: 576px) {
+    .history-container {
+        padding: 30px 16px;
+    }
+
+    .history-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .history-section {
+        padding: 15px;
+    }
+}

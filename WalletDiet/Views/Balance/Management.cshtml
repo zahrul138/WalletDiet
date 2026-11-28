@@ -120,8 +120,15 @@
                 <!-- Transaction History -->
                 <section class="balance-history">
                     <div class="balance-history-heading">
-                        <h4>Transaction History</h4>
-                        <span>Recent transactions</span>
+                        <div>
+                            <h4>Transaction History</h4>
+                            <span>Recent transactions</span>
+                        </div>
+
+                        <a asp-controller="Balance"
+                           asp-action="History">
+                            See All Transactions
+                        </a>
                     </div>
 
                     @if (Model.Transactions.Any())

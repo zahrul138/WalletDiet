@@ -1,0 +1,130 @@
+﻿@model List<WalletDiet.Models.BalanceTransaction>
+@using WalletDiet.Models
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Transaction History - WalletDiet</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/auth.css" />
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+    <link rel="stylesheet" href="~/css/balance-management.css" />
+    <link rel="stylesheet" href="~/css/transaction-history.css" />
+</head>
+
+<body>
+    <div data-scene="dark" data-bs-theme="dark">
+
+        <div class="g-scene">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+        </div>
+
+        <div class="dashboard-wrap">
+
+            <main class="dashboard-container balance-container">
+
+                <!-- Page Header -->
+                <section class="balance-heading">
+
+                    <a asp-controller="Balance"
+                       asp-action="Management"
+                       class="balance-back-link">
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="1.8"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path d="M19 12H5" />
+                            <path d="m12 19-7-7 7-7" />
+                        </svg>
+                        Back to Balance
+                    </a>
+
+                    <h2>Transaction History</h2>
+                    <p>View all your balance activities.</p>
+
+                </section>
+
+                <!-- All Transactions -->
+                <section class="balance-history">
+
+                    <div class="balance-history-heading">
+                        <div>
+                            <h4>All Transactions</h4>
+                            <span> @Model.Count transactions</span>
+                        </div>
+                    </div>
+
+                    @if (Model.Any())
+                    {
+                        <div class="balance-transaction-list">
+
+                            @foreach (var transaction in Model)
+                            {
+                                <div class="balance-transaction-item">
+
+                                    <div class="transaction-info">
+
+                                        <div class="transaction-icon @(transaction.Type == BalanceTransactionType.Add ? "add" : "remove")">
+                                            @(transaction.Type == BalanceTransactionType.Add ? "+" : "−")
+                                        </div>
+
+                                        <div>
+                                            <h6>
+                                                @(transaction.Type == BalanceTransactionType.Add
+                                                                                        ? "Balance Added"
+                                                                                        : "Balance Removed")
+                                                                                                        </h6>
+
+                                            <p>
+                                                @(string.IsNullOrWhiteSpace(transaction.Description)
+                                                                                        ? "No description"
+                                                                                        : transaction.Description)
+                                    </p>
+
+                                                                            <small>
+                                                                                @transaction.CreatedAt.ToString("dd MMM yyyy, HH:mm")
+                                                                            </small>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <span class="transaction-amount @(transaction.Type == BalanceTransactionType.Add ? "positive" : "negative")">
+                                                                        @(transaction.Type == BalanceTransactionType.Add ? "+" : "−")
+                                                                        @transaction.Amount.ToString(
+                                                                        "C0",
+                                                                        System.Globalization.CultureInfo.GetCultureInfo("id-ID"))
+                            </span>
+
+                                </div>
+                                                }
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card balance-empty-state">
+                            <p>No transactions available yet.</p>
+                        </div>
+                    }
+
+                </section>
+
+            </main>
+
+        </div>
+    </div>
+</body>
+</html>
